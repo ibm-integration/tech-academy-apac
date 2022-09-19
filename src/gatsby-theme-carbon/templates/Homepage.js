@@ -21,7 +21,7 @@ const SecondRightText = () => (
   </p>
 );
 
-const BannerText = () => <h1>SKO Technical Academy Japan - Integration</h1>;
+const BannerText = () => <h1>SKO Technical Academy APAC - Integration</h1>;
 
 const customProps = {
   Banner: <HomepageBanner renderText={BannerText} image={Carbon} />,
