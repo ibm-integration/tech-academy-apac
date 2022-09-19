@@ -33,7 +33,7 @@ title: Agile Integration Best Practices Using an IBM GitOps Automation Framework
 
 ***
 
-## Lab Overview 2222
+## Lab Overview
 
 Have you received requests to deliver a Multi-style Integration demo or PoC, and you don’t know how to quickly prepare this environment? You are on the right place. In this session,  you will learn how to prepare a demo/PoC environment using GitOps automation framework. This environment will include different assets, capabilities, services and applications of IBM Cloud Pak for Integration.
 
@@ -41,7 +41,7 @@ The first main goal of this session is to provide you a complete CP4I environmen
 
 The second goal is to provide this environment quickly and easily, by using the GitOps automation framework, more details <a href="https://production-gitops.dev/" target="_blank">here</a> about Cloud Pak Production Deployment Guides.
 
-As part of the evalution process of this session, at the end, you will need to capture and upload screenshots of your final progress. In this document, you will see some references about the necessary screenshots.
+This document was created for Senior Technical Specialists, and we know you are one of them. Because of that, instead to have very detailled steps, we have high level directions about what you need to do. There are some challenges that we don't explain how to do them, but we are pretty sure that you can do it! But let the proctors know if you have any issue to complete the challenges.
 
 In this session you will learn:
   - the IBM opinionated point of view regarding a GitOps centric method to manage RHOCP infrastructure, IBM integration software and application workload code (three tier GitOps architecture).
@@ -62,6 +62,7 @@ In this session you will learn:
 - You need to have a SalesForce account. This should have been completed as part of the <a href="https://ibm-garage-tsa.github.io/cp4i-demohub/salesdemos/carrepair-new/prepare/#setting-up-salesforce" target="_blank">Tech Academy pre-requisite work</a>.
 - You need to have a mailtrap account. This too should have been completed as part of the <a href="https://mailtrap.io/" target="_blank">Tech Academy pre-requisite work</a>.
 - You have access to GitHub Organization with all repositories. Your proctor will provide that for you.
+- You need to have your GitHub Personal Access Token. Check <a href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token" target="_blank">here</a> how to create it.
 
 ***
 
@@ -177,7 +178,11 @@ In this section you will do some initial steps to prepare your environment for t
 
 ## 1 - Clone Repositories
 
-1. As explained before, you already have Github repositories for your team. On previous section, you took notes of your GitHub organization's name. Now that you have the name, let's clone the repositories in your local machine. Back to the terminal window, use the command below to define your GIT_ORG variable.
+As explained before, you already have Github repositories for your team. On previous section, you took notes of your GitHub organization's name. Now that you have the name, let's clone the repositories in your local machine.
+
+To clone the respositories, you need to have your Github personal acccess token. If don't have it, follow [these instructions](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token).
+
+1. Back to the terminal window, use the command below to define your GIT_ORG variable.
 
 ```
 export GIT_ORG={REPLACE_WITH_YOUR_GIT_ORG}
