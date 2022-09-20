@@ -121,24 +121,31 @@ Next steps, assume that you already accepted the Account invitation in IBM Cloud
 ## 1 - Create a Topic in Event Streams
 
 1. Navigate to the Event Streams instance from the CP4I Platform Navigator. Click on the corresponding instance. In my case it is called ***es-demo***.
+
 ![ACE Toolkit integration with ES Configuration Step 1](images/2021-09-18_12-53-40.png)
 
 2. From the Event Streams Home page click on the ***Create a topic*** tile.
+
 ![ACE Toolkit integration with ES Configuration Step 2](images/2021-09-18_13-15-14.png)
 
 3. The wizard will guide you during the process. In the first screen type the topic name. In my case I have used ***kafka-cp4i-demo-topic***. You can use any name, you will use it later on when cofniguring your Flow in the Toolkit.
+
 ![ACE Toolkit integration with ES Configuration Step 3](images/2021-09-18_13-15-50.png)
 
 4. You can review the different options, but for simplicity I'm accepting the defaults, so you can simply click ***Next***.
+
 ![ACE Toolkit integration with ES Configuration Step 4](images/2021-09-18_13-16-47.png)
 
 5. You can change the retention period, but I'm accepting the default clicking ***Next*** without manking any change.
+
 ![ACE Toolkit integration with ES Configuration Step 5](images/2021-09-18_13-17-12.png)
 
 6. Click ***Create Topic*** to complete the wizard.
+
 ![ACE Toolkit integration with ES Configuration Step 6](images/2021-09-18_13-17-40.png)
 
 7. The new topic will be displayed in the ***Topics*** page. First confirm the topic was created and then return to the home page clicking on the ***Home icon***.
+
 ![ACE Toolkit integration with ES Configuration Step 7](images/2021-09-18_13-18-29.png)
 
 ***
@@ -146,36 +153,47 @@ Next steps, assume that you already accepted the Account invitation in IBM Cloud
 ## 2 - Create SCRAM credentials to connect to Event Streams
 
 1. From the Event Streams Home page click on the ***Connect to the cluster*** tile.
+
 ![ACE Toolkit integration with ES Configuration Step 8](images/2021-09-18_12-54-00.png)
 
 2. The wizard will guide you duirng the process. First, make sure you have selected ***External***. Then, copy the bootstrap information and paste it in a safe place since we will need it later on. Finally, click on ***Generate SCRAM credentials***.
+
 ![ACE Toolkit integration with ES Configuration Step 9](images/2021-09-18_19-29-39.png)
 
 3. In the pop up window type the name of the user you want to create. In my case I have used ***ace-es-user-scram***. Then click ***Next***.
+
 ![ACE Toolkit integration with ES Configuration Step 10](images/2021-09-18_19-38-28.png)
 
 4. I will grant full access to the new user, but you can control the level of acces as needed. Once you adjust the values click ***Next***.
+
 ![ACE Toolkit integration with ES Configuration Step 11](images/2021-09-18_19-42-36.png)
 
 5. Adjust the values as needed and click ***Next***.
+
 ![ACE Toolkit integration with ES Configuration Step 12](images/2021-09-18_19-45-47.png)
 
 6. Select ***All transactional IDs*** or the value you prefer and then clik ***Generate credentials***.
+
 ![ACE Toolkit integration with ES Configuration Step 13](images/2021-09-18_19-47-44.png)
 
 7. After a moment the credentials are generated and presented to you. Make sure to copy the password and paste it into a notepad since we will use it later.
+
 ![ACE Toolkit integration with ES Configuration Step 14](images/2021-09-18_19-51-31.png)
 
 8. Scroll down to the ***Certificates** section and click on ***Download certificate***.
+
 ![ACE Toolkit integration with ES Configuration Step 15](images/2021-09-18_19-56-55.png)
 
 9. Navigate to the folder where you want to save the certificate and then click ***Save***.
+
 ![ACE Toolkit integration with ES Configuration Step 16](images/2021-09-18_13-08-38.png)
 
 10. Once the certifcate is saved the corresponding password will be displayed. Click on the **Copy* icon to paste it into a notepad for future use.
+
 ![ACE Toolkit integration with ES Configuration Step 17](images/2021-09-18_20-13-51.png)
 
 11. Scroll up and close the wizard.
+
 ![ACE Toolkit integration with ES Configuration Step 18](images/2021-09-18_20-17-49.png)
 
 12. Before we move to ACE we will need to convert the certificate format from PKCS12 to JKS. Open a ***Terminal*** and navigate to the location where you stored the certificate in *step 8* and run the following command changing the *cert-password* value for the actual password you got in setp 10.
