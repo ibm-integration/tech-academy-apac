@@ -398,9 +398,9 @@ We are ready to move to the final phase of the process.
 
 ![ACE Toolkit integration with ES Configuration Step 36](images/2021-09-19_09-03-00.png)
 
-7. This will start the deployment wizard. Select the ***Quick start toolkit integration** tile and then click the ***Next*** button.
+7. This will start the deployment wizard. Select the **Medium Integration** tile and then click the ***Next*** button.
 
-![ACE Toolkit integration with ES Configuration Step 37](images/2021-09-19_11-33-19.png)
+![ACE Toolkit integration with ES Configuration Step 37](images/medium.png)
 
 8. In the next window click on the drop down box to select the BAR file we previuosly uploaded and then click ***Next***.
 
@@ -410,15 +410,21 @@ We are ready to move to the final phase of the process.
 
 ![ACE Toolkit integration with ES Configuration Step 39](images/2021-12-22_06-07-07.png)
 
-10. In the next page give your deployment a name, i.e ***jgr-es-api-scram*** and click ***Create*** to start the deployment.
+10. In the next page give your deployment a name, i.e ***jgr-es-api-scram*** and open the ***YAML EDITOR***.
 
-![ACE Toolkit integration with ES Configuration Step 40](images/2021-09-19_11-45-36.png)
+![ACE Toolkit integration with ES Configuration Step 40](images/yaml-editor.png)
 
-11. After a moment you will be taken back to the Dashboard page where you will see a new tile with your **Integration Server** deployment name in ***Pending*** state, similar to the picture shown below:
+11. Because of a known issue in Integration Server v12.0.5 with Kafka Nodes, we will use a previous version of the Integration Server. Let's do it!
+
+    Change the **license** value to **L-APEH-C9NCK6** (A). And change the **version** value to **12.0.4.0-r2** (B). Then click **Create** (C).
+
+![ACE Toolkit integration with ES Configuration Step 40](images/yaml-values.png)
+
+12. After a moment you will be taken back to the Dashboard page where you will see a new tile with your **Integration Server** deployment name in ***Pending*** state, similar to the picture shown below:
 
 ![ACE Toolkit integration with ES Configuration Step 41](images/2021-09-19_11-47-40.png)
 
-12. The **App Connect Dashboard** is deploying the **Integration Server** in the background creating the corresponding pod in the specificed **namespace** of the **Red Hat OpenShift Container Platform**. This process can take more than a minute depending on your environment. Click the refresh button in your browser until you see the tile corresponding to your deployment in ***Ready*** state as shown below:
+13. The **App Connect Dashboard** is deploying the **Integration Server** in the background creating the corresponding pod in the specificed **namespace** of the **Red Hat OpenShift Container Platform**. This process can take more than a minute depending on your environment. Click the refresh button in your browser until you see the tile corresponding to your deployment in ***Ready*** state as shown below:
 
 ![ACE Toolkit integration with ES Configuration Step 42](images/2021-09-19_12-21-31.png)
 
