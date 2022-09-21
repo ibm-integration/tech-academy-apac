@@ -310,7 +310,7 @@ Now we can move to the next phase.
 
 ## 4 - Create Configurations in ACE Dashboard
 
-1. From the Platform Navigator click on the ***ACE Dashboard*** you want to work. In my case it is called ***ace-dashboard*** to avoid any confusion.
+1. Back to CP4I Platform Navigator, open the ***ACE Dashboard***.
 
 ![ACE Toolkit integration with ES Configuration Step 19](images/2021-09-18_13-19-50.png)
 
@@ -434,13 +434,11 @@ Now is time to test everything is working as expected. Click on the tile corresp
 
 ![ACE Toolkit integration with ES Configuration Step 43](images/2021-09-19_12-25-00.png)
 
-15. In the next page navigate to the operation implemented in your flow (***POST /contacts*** in my case). Then click on the ***Try it*** tab followed by the ***Generate*** hyperlink to generate some test data. Review the data generated and click the ***Send*** button.
+15. In the next page navigate to the operation implemented in your flow (***POST /contacts***). Then click on the ***Try it*** tab followed by the ***Generate*** hyperlink to generate some test data. Review the data generated and click the ***Send*** button.
 
 ![ACE Toolkit integration with ES Configuration Step 44](images/2021-09-19_12-44-47.png)
 
 16. After a moment you will get a response back. If everything is OK you will receive a ***200*** response code indicating the request was successful and the same payload you sent plus some metadata including a timestamp showing the request completed few seconds ago.
-
-    **NOTE:** Some people has reported issues at this stage that could be caused for the resources assigned to the **Integration Server** at deployment time. In this case, you can wait a little bit longer, like 3 or 4 more minutes, or you can redeploy the **Integration Server** increasing the *CPU* and *Memory* assigned to it.
 
 ![ACE Toolkit integration with ES Configuration Step 44](images/2021-09-19_12-48-15.png)
 

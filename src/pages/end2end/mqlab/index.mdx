@@ -43,6 +43,7 @@ Lab's takeways:
 - You need to have an OpenShift environment with CP4I. For this session, your proctor will provide you a pre-installed environment, with admin access (more details below). If you want to create your personal environment, you can request an environment on IBM TechZone.
 - You should have an MQ Queue Manager runtime pre-created in your CP4I on ROKS environment.
 - You need to have the IBM App Connect Enterprise Toolkit installed in your desktop. Follow the sections Download IBM App Connect Enterprise for Developers and Install IBM App Connect Enterprise from <a href="https://www.ibm.com/docs/en/app-connect/11.0.0?topic=started-get-hands-experience" target="_blank">this tutorial</a> to install it.
+- You need to download the OpenAPI spec. Open this <a href="https://github.ibm.com/joel-gomez/cp4i-tech-jam/raw/main/artifacts/jgrmqapi.json" target="_blank">page</a> and save as swagger.json. You will use this spec later in the lab.
 
 ***
 
@@ -116,20 +117,187 @@ Next steps, assume that you already accepted the Account invitation in IBM Cloud
 
 ## 1 - Low Code / No Code Development with ACE Toolkit
 
+1. Open the Toolkit in your workstation and create a new REST API project as shown below.
+
+![ACE Toolkit REST API with MQ Step 1](images/2022-06-28_12-23-53.png)
+
+2. Give a name to your project, i.e. *MQAPI* and then select the option to *Import resources* since we will leverage a definition already created.
+
+![ACE Toolkit REST API with MQ Step 2](images/2022-06-28_12-25-32.png)
+
+3. In the wizard click *Browse* and navigate to the location where the OpenAPI file definition is located.
+
+![ACE Toolkit REST API with MQ Step 3](images/2022-06-28_12-26-19.png)
+
+4. Once the path is displayed in the *Location* field click *Finish*.
+
+![ACE Toolkit REST API with MQ Step 4](images/2022-06-28_12-28-17.png)
+
+5. The REST API will be displayed, scroll to the right if needed to open the sunflow operation as shown in the image to proceed to implement the API logic.
+
+![ACE Toolkit REST API with MQ Step 5](images/2022-06-28_12-31-05.png)
+
+6. The *Message Flow Editor* will be open with only the *Input* and *Output* terminals. Double click the tab to maximize the editor and work with the flow.
+
+![ACE Toolkit REST API with MQ Step 6](images/2022-06-28_12-32-33.png)
+
+7. Drag and drop the *Nodes* from the palette to implemeng the "logic". In this case we will use the following nodes:
+  * Flow Order Node,
+  * HTTP Header Node,
+  * MQ Header Node,
+  * MQ Output Node, and
+  * Mapping Node.
+
+    And you will proceed to wire them. The flow should look like the one below. Once you are done double click the tab again in order to access the properties for each node.
+![ACE Toolkit REST API with MQ Step 7](images/2022-06-28_12-37-45.png)
+
+8. Now we will configure each node, starting with the *HTTP Header Node*. Click on it to bring it to focus and then select the *HTTP Input* tab followed by the *Delete header* option as shown below.
+
+![ACE Toolkit REST API with MQ Step 8](images/2022-06-28_12-40-26.png)
+
+9. Now select the *MQ Header Node* and navigate to the *MQMD* tab enabling the *Add header* option. And selecting *MQMFT_STRING* for the *Format* field as shown below.
+
+![ACE Toolkit REST API with MQ Step 9](images/2022-06-28_13-01-52.png)
+
+10. Then select the *MQ Output Node* and in the *Basic* tab enter the name of the queue we will use to put the messages, in this case *CP4I.DEMO.API.Q*
+
+![ACE Toolkit REST API with MQ Step 10](images/2022-06-28_13-04-48.png)
+
+11. In the same *MQ Output Node* navigate to the *MQ Connection* tab enter the information to connect to the Queue Manager. The information is based on the configuration we used for MQ, and for simplicity is included below.
+
+Property | Value
+---------|-------
+Connection | ***MQ client connection properties***
+Destination queue manager name | ***QMGRDEMO***
+Queue manager host name | ***qmgr-demo-ibm-mq***
+Listener port number | ***1414***
+Channel name | ***ACE.TO.MQ***
+
+![ACE Toolkit REST API with MQ Step 11](images/2022-06-28_13-07-42.png)
+
+12. Now double click the *Mapping Node*,
+
+![ACE Toolkit REST API with MQ Step 12](images/2022-06-28_13-08-43.png)
+
+13. In the wizard window simply click *Finish*.
+
+![ACE Toolkit REST API with MQ Step 13](images/2022-06-28_13-09-14.png)
+
+14. Expand the *JSON* section in both the input and output message assemblies and connect the *payload* as shown below.
+
+![ACE Toolkit REST API with MQ Step 14](images/2022-06-28_13-11-15.png)
+
+15. Then *right click* the *code* field and select *Add Assign* from the menu.
+
+![ACE Toolkit REST API with MQ Step 15](images/2022-06-28_14-45-30.png)
+
+16. In the properties section enter ***CP4I0000*** in the *value* field.
+
+![ACE Toolkit REST API with MQ Step 16](images/2022-06-28_14-46-24.png)
+
+17. Repeat the same process for field *msg* and assign the value ***Request has been processed***
+
+18. Do the same for field *time* but this time we will replace the *Assign* option with the *current-time* function as shown below.
+
+![ACE Toolkit REST API with MQ Step 18](images/2022-06-28_14-47-50.png)
+
+19. The integration flow is completed. Save your progress and close the *mapping* tab.
+
+![ACE Toolkit REST API with MQ Step 19](images/2022-06-28_14-48-57.png)
+
 
 ***
 
 ## 2 - Deploy BAR file using ACE Dashboard
 
+1. Now we will generate the BAR file that we will use to deploy the Integration into CP4I. From the *File* menu select *New* and then *BAR file* as shown below.
+
+![ACE Toolkit REST API with MQ Step 20](images/2022-06-28_14-50-45.png)
+
+2. In the pop up window enter the name of the BAR file, in this case ***CP4IACEMQAPIPREM***. And then click *Finish*.
+
+![ACE Toolkit REST API with MQ Step 21](images/2022-06-28_14-52-42.png)
+
+3. Click *OK* in the confirmation window.
+
+![ACE Toolkit REST API with MQ Step 22](images/2022-06-28_14-54-12.png)
+
+4. The ***BAR Editor*** is open. Select ***Applications, shared libraries, services, REST APIs, and Test Projects*** to display the right type of resources and then select your application, in this case ***MQAPI***. Finally click ***Build and Save...*** to create the BAR file.
+
+![ACE Toolkit integration with ES Configuration Step 31](images/bar-build.png)
+
+5. You can dismiss the notification window reporting the result clicking ***OK***.
+
+![ACE Toolkit integration with ES Configuration Step 32](images/2021-09-19_08-11-35.png)
 
 ***
 
-## 3 - Testing the API
+## 3 - Deploy BAR file using ACE Dashboard
 
+1. Back to Platform Navigator, open the **ACE Dashboard**.
 
+![ACE Toolkit integration with ES Configuration Step 19](images/2021-09-18_13-19-50.png)
+
+2. To deploy a BAR file, you need to create an Integration server. Let’s do it! Click **Create a server**.
+
+![](images/ace-mq-create-server.png)
+
+3. This will start the deployment wizard. Select the **Small Integration** tile and then click the **Next** button.
+
+![](images/small.png)
+
+4. Click to upload your BAR File. And select the **MQAPI.bar**. And click **Next**.
+
+![](images/bar-server.png)
+
+5. You do not need to use the configuration package (configuration package contains the files that you can use for App Connect Enterprise works with Databases, Event Streams, etc) click **Next**.
+
+![](images/ace-mq-configuration.png)
+
+6. On Create an Integration Server page, enter the Integration Server name as **neworder** (1). Then click **Create** (2).
+
+![](images/create-mqapi.png)
+
+  Great, your Integration Server was created!
+
+  `Note:`` The deployment process takes up to 5 minutes, refresh the browser to see the BAR file deployed and started.
 
 ***
 
+## 4 - Testing the API
+
+1. Here you can see the App Connect Enterprise Dashboard with the Integration Server neworder deployed and started. Click the **neworder** server icon.
+
+![](images/ace-mq-neworder-server.png)
+
+2. The next window shows the API in started state. Click on the tile to get the details.
+
+3. In the next page navigate to the operation implemented in your flow (**POST /contacts**). Then click on the **Try it** tab followed by the **Generate** hyperlink to generate some test data. Review the data generated and click the **Send** button.
+
+![](images/test-api.png)
+
+4. After a moment you will get a response back. If everything is OK you will receive a ***200*** response code indicating the request was successful and the same payload you sent plus some metadata including a timestamp showing the request completed few seconds ago.
+
+![ACE Toolkit integration with ES Configuration Step 44](images/2021-09-19_12-48-15.png)
+
+5. Now, let’s check the message arrived in the NEWORDER queue in IBM MQ. Let’s use IBM MQ Console to check it. Open the **Menu**, and on **Run** section, click on **Messaging**.
+
+![](images/open-mq.png)
+
+6.Click Manage **QMGRDEMO**.
+
+![](images/qmg-demo.png)
+
+7. Here you can see that a new message has arrived in **CP4I.DEMO.API.Q** queue.
+
+![](images/result.png)
+
+8.You are welcome, to click on the **CP4I.DEMO.API.Q** queue, to explore the message.
+
+  Congratulations! Here you completed this lab.
+
+
+***
 
 ## Summary
 
